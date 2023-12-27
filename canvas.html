@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rotating Spiral</title>
+  <style>
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas" width="400" height="400"></canvas>
+
+  <script>
+    // JavaScript code for drawing a rotating spiral
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let angle = 0;
+    let animationSpeed = 0.005; // Adjust rotation speed here
+    ctx.lineWidth = 2; // Adjust line thickness here
+
+    function drawSpiral() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+
+      for (let i = 0; i < 1000; i++) {
+        const radius = i * 0.5;
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+        ctx.lineTo(x, y);
+        angle += 0.1;
+      }
+
+      ctx.strokeStyle = 'blue';
+      ctx.stroke();
+    }
+
+    function animate() {
+      drawSpiral();
+      angle += animationSpeed;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
